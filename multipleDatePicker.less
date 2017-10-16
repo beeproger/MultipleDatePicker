@@ -61,7 +61,12 @@
 }
 
 .picker-top-row, .picker-day{
-  padding: 10px 0;
+  padding: 0;
+
+  span {
+    display: block;
+    padding: 10px 0;
+  }
 }
 
 .picker-day{
@@ -75,7 +80,7 @@
   color: @picker-day-today;
 }
 
-.picker-day:not(.picker-off):not(.picker-empty):hover span {
+.picker-day:not(.picker-off):not(.picker-empty):not(.week):hover span {
   background-color: @pickable-day-picked-background;
   color: @pickable-day-picked-color;
   cursor: pointer;
@@ -99,8 +104,4 @@
 
 .picker-day.week {
   border: 0 none;
-}
-
-.picker-day.week:hover span {
-  background: @non-pickable-day-background;
 }
