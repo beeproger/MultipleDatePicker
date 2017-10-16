@@ -396,7 +396,7 @@
                         if (day.mdp.otherMonth) {
                             css += ' picker-other-month';
                         }
-                    } else if (date.type == 'week') {
+                    } else if (day.type == 'week') {
                         css += ' week';
                     }
                     return css;
