@@ -371,29 +371,33 @@
 
                 scope.getDayClasses = function (day) {
                     var css = '';
-                    if (day.css && (!day.mdp.otherMonth || scope.showDaysOfSurroundingMonths)) {
-                        css += ' ' + day.css;
-                    }
-                    if (scope.cssDaysOfSurroundingMonths && day.mdp.otherMonth) {
-                        css += ' ' + scope.cssDaysOfSurroundingMonths;
-                    }
-                    if (day.mdp.selected) {
-                        css += ' picker-selected';
-                    }
-                    if (!day.selectable) {
-                        css += ' picker-off';
-                    }
-                    if (day.mdp.today) {
-                        css += ' today';
-                    }
-                    if (day.mdp.past) {
-                        css += ' past';
-                    }
-                    if (day.mdp.future) {
-                        css += ' future';
-                    }
-                    if (day.mdp.otherMonth) {
-                        css += ' picker-other-month';
+                    if (day.type == 'day') {
+                        if (day.css && (!day.mdp.otherMonth || scope.showDaysOfSurroundingMonths)) {
+                            css += ' ' + day.css;
+                        }
+                        if (scope.cssDaysOfSurroundingMonths && day.mdp.otherMonth) {
+                            css += ' ' + scope.cssDaysOfSurroundingMonths;
+                        }
+                        if (day.mdp.selected) {
+                            css += ' picker-selected';
+                        }
+                        if (!day.selectable) {
+                            css += ' picker-off';
+                        }
+                        if (day.mdp.today) {
+                            css += ' today';
+                        }
+                        if (day.mdp.past) {
+                            css += ' past';
+                        }
+                        if (day.mdp.future) {
+                            css += ' future';
+                        }
+                        if (day.mdp.otherMonth) {
+                            css += ' picker-other-month';
+                        }
+                    } else if (date.type == 'week') {
+                        css += ' week';
                     }
                     return css;
                 };
