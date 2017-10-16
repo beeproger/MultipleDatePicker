@@ -153,7 +153,12 @@
             '<div class="text-center" ng-repeat="day in daysOfWeek">{{day}}</div>' +
             '</div>' +
             '<div class="picker-days-row">' +
-            '<div class="text-center picker-day {{getDayClasses(day)}}" title="{{day.title}}" ng-repeat="day in days" ng-click="toggleDay($event, day)" ng-mouseover="hoverDay($event, day)" ng-mouseleave="dayHover($event, day)" mdp-right-click="rightClicked($event,day)">{{day ? day.mdp.otherMonth && !showDaysOfSurroundingMonths ? \'&nbsp;\' : day.date.format(\'D\') : \'\'}}</div>' +
+            '<div class="text-center picker-day {{getDayClasses(day)}}" title="{{day.title}}" ng-repeat="day in days">' +
+            '<span ng-if="day.type === \'day\'" ng-click="toggleDay($event, day)" ng-mouseover="hoverDay($event, day)" ng-mouseleave="dayHover($event, day)" mdp-right-click="rightClicked($event,day)">' +
+            '{{day ? day.mdp.otherMonth && !showDaysOfSurroundingMonths ? \'&nbsp;\' : day.date.format(\'D\') : \'\'}}' +
+            '</span>' +
+            '<span ng-if="day.type == \'week\'">{{ day.week }}</span>' +
+            '</div>' +
             '</div>' +
             '</div>',
             link: function (scope) {
@@ -470,6 +475,7 @@
                         lastDay = moment(firstDayOfMonth).endOf('month'),
                         createDate = function () {
                             var day = {
+                                type: 'day',
                                 date: moment(previousDay.add(1, 'day')),
                                 mdp: {
                                     selected: false
@@ -502,9 +508,9 @@
                     for (var j = 0; j < maxDays; j++) {
 
                         var date = createDate();
-                        if (j == 0 || j % 7) {
+                        if (j % 7 == 0) {
                             var week = date.date.isoWeek();
-                            days.push(week);
+                            days.push({ type: 'week', week: week });
                         }
                         days.push(date);
                     }
